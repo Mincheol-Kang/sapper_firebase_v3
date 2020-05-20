@@ -46,5 +46,5 @@
 <p><strong> {my_message} </strong></p>
 
 <script>
-const my_message = '이 문장은 svelte의 const 변수에 저장한 문자열입니다.'
+const my_message = '이 문장은 svelte의 const 변수에 저장한 문자열입니다. (이제 얼추 안정화된 듯..)'
 </script>
