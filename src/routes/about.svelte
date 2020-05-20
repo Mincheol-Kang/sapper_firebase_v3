@@ -1,7 +1,8 @@
 <svelte:head>
-	<title>About</title>
+	<title>About 페이지</title>
 </svelte:head>
 
 <h1>About 페이지</h1>
 
-<p>This is the 'about' page. There's not much here.</p>
+<p>svelte의 매력에 홀딱 반한 일자무식 개린이의 연습장입니다.</p>
+<p>엄청난 삽질 끝에 firebase로 배포한 sapper 템플릿 페이지입니다. (엉엉 ㅠㅠ)</p>

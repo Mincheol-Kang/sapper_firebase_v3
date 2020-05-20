@@ -33,14 +33,18 @@
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>Sapper 프로젝트 템플릿</title>
 </svelte:head>
 
-<h1>잘했다고 봐야겠지?!</h1>
+<h1>짱 잘했또!</h1>
 
 <figure>
 	<img alt='Success Kid' src='successkid.jpg'>
-	<figcaption>Have fun with Sapper!</figcaption>
+	<figcaption>Sapper와 함께 즐겨보자규!</figcaption>
 </figure>
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<p><strong> {my_message} </strong></p>
+
+<script>
+const my_message = '이 문장은 svelte의 const 변수에 저장한 문자열입니다.'
+</script>
