@@ -120,7 +120,7 @@ firebase init 실행했을 때 선택하고 입력할 항목들 핵심만 뽑으
     ? What do you want to use as your public directory? dist
     ? Configure as a single-page app (rewrite all urls to /index.html)? No
 13. ./package.json 파일의 “scripts“ 부분 수정:
-    "build": "sapper build --legacy && cp -R ./__sapper__/export ./dist",
+    "build": "sapper export --legacy && cp -R ./__sapper__/export ./dist",
     "prebuild": "rm -rf ./dist",
     "start": "npm run build && firebase serve",
     "predeploy": "npm run build",
@@ -142,10 +142,15 @@ git 작업이나 로컬 테스트 과정 빼고, sapper 템플릿을 설치하�
     ? What do you want to use as your public directory? dist
     ? Configure as a single-page app (rewrite all urls to /index.html)? No
 4. ./package.json 파일의 “scripts“ 부분 수정:
-    "build": "sapper build --legacy && cp -R ./__sapper__/export ./dist",
+    "build": "sapper export --legacy && cp -R ./__sapper__/export ./dist",
     "prebuild": "rm -rf ./dist",
     "start": "npm run build && firebase serve",
     "predeploy": "npm run build",
     "deploy": "firebase deploy",
 5. $ npm run deploy (배포를 위한 dist 폴더 재생성 후 firebase로 정식 배포)
+```
+
+로컬에서 수정 작업 후 로컬에서 테스트해볼 땐 다음 명령이면 로컬호스트 3000 포트가 열립니다.
+```bash
+$ npx sapper dev
 ```
