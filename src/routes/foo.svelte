@@ -56,9 +56,36 @@
       abc_color = "gray";
     }
   }
+
+  let triples_count = '';
+  let pythagoras_triples = '';
+  let imin_a = min_a;
+  $: xmin_a = imin_a + 1;
+  $: max_a = xmin_a + 10;
+  function getPythagorasTriples() {
+	  let a, b, c, count=0;
+	  pythagoras_triples = '';
+      for (a = imin_a; a <= max_a; a++) {
+        b = a + 1;
+        c = b + 1;
+        while(1) {
+          while(c*c - b*b < a*a)
+            c++;
+          if(c*c - b*b === a*a) {
+            count ++;
+            // pythagoras_triples += `[${count}] (${a}, ${b}, ${c})\n`;
+            pythagoras_triples+= `(${a}, ${b}, ${c}) `;
+          } else if(c-b === 1) { /* cc-bb > aa && c-b == 1 */
+            break;
+          }
+          b++;
+        }
+      }
+      triples_count = `====== 총 ${count}개 ======`;
+  }
 </script>
 
-<style scoped>
+<style>
   .content {
     text-align: center;
   }
@@ -91,6 +118,22 @@
   }
   .gray {
     color: rgb(151, 150, 150);
+  }
+  textarea {
+	  width: 100%;
+	  height: 300px;
+      font-size: 15px;
+  }
+  #app {
+	  margin-top: 20px;
+  }
+  #min_a, #max_a {
+    font-size: 15px;
+    text-align: left;
+    width: 50px;
+  }
+  #min_a {
+    text-align: right;
   }
 </style>
 
@@ -156,4 +199,14 @@
       </tr>
     </tbody>
   </table>
+  <div id="app">
+    <input id="min_a" type="number" min={min_a} bind:value={imin_a} on:keypress={getPythagorasTriples} />
+	≤ 𝒂 ≤ 
+	<input id="max_a" type="number" min={xmin_a} bind:value={max_a} on:keypress={getPythagorasTriples} />
+	<button on:click={getPythagorasTriples}
+	>피타고라스 공식 만족하는 수 조합 구하기</button> {triples_count}
+	<div>
+		<textarea>{pythagoras_triples}</textarea>
+	</div>
+  </div>
 </div>
