@@ -61,7 +61,7 @@
   let pythagoras_triples = '';
   let imin_a = min_a;
   $: xmin_a = imin_a + 1;
-  $: max_a = xmin_a + 10;
+  $: max_a = imin_a + 10;
   function getPythagorasTriples() {
 	  let a, b, c, count=0;
 	  pythagoras_triples = '';
