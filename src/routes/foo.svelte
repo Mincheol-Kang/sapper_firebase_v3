@@ -17,23 +17,21 @@
   $: cc_minus_bb = number_cc - number_bb;
   $: compareNumbers(cc_minus_bb - number_aa);
 
-  function down_a() {
-    if (number_a > min_a) number_a--;
-  }
-  function up_a() {
-    number_a++;
-  }
-  function down_b() {
-    if (number_b > min_b) number_b--;
-  }
-  function up_b() {
-    number_b++;
-  }
-  function down_c() {
-    if (number_c > min_c) number_c--;
-  }
-  function up_c() {
-    number_c++;
+  function changeNumber(number_name, is_count_up) {
+    switch (number_name) {
+      case 'a':
+        is_count_up ? number_a ++ : (number_a > min_a && number_a --);
+        break;
+      case 'b':
+        is_count_up ? number_b ++ : (number_b > min_b && number_b --);
+        break;
+      case 'c':        
+        is_count_up ? number_c ++ : (number_c > min_c && number_c --);
+        break;
+        
+      default:
+        break;
+    }
   }
 
   function compareNumbers(compare_aabbcc) {
@@ -145,19 +143,19 @@
   <table>
     <thead>
       <th>
-        <button on:click={down_a}>-</button>
+        <button on:click={() => changeNumber('a',false)}>-</button>
         𝒂
-        <button on:click={up_a}>+</button>
+        <button on:click={() => changeNumber('a',true)}>+</button>
       </th>
       <th>
-        <button on:click={down_b}>-</button>
+        <button on:click={() => changeNumber('b',false)}>-</button>
         𝒃
-        <button on:click={up_b}>+</button>
+        <button on:click={() => changeNumber('b',true)}>+</button>
       </th>
       <th>
-        <button on:click={down_c}>-</button>
+        <button on:click={() => changeNumber('c',false)}>-</button>
         𝒄
-        <button on:click={up_c}>+</button>
+        <button on:click={() => changeNumber('c',true)}>+</button>
       </th>
     </thead>
     <tbody>
@@ -201,12 +199,12 @@
   </table>
   <div id="app">
     <input id="min_a" type="number" min={min_a} bind:value={imin_a} on:keypress={getPythagorasTriples} />
-	≤ 𝒂 ≤ 
-	<input id="max_a" type="number" min={xmin_a} bind:value={max_a} on:keypress={getPythagorasTriples} />
-	<button on:click={getPythagorasTriples}
-	>피타고라스 공식 만족하는 수 조합 구하기</button> {triples_count}
-	<div>
-		<textarea>{pythagoras_triples}</textarea>
-	</div>
+    ≤ 𝒂 ≤ 
+    <input id="max_a" type="number" min={xmin_a} bind:value={max_a} on:keypress={getPythagorasTriples} />
+    <button on:click={getPythagorasTriples}
+    >피타고라스 공식 만족하는 수 조합 구하기</button> {triples_count}
+    <div>
+      <textarea>{pythagoras_triples}</textarea>
+    </div>
   </div>
 </div>
