@@ -1,7 +1,7 @@
 <script>
   const title = "Pythagoras Triples";
   const min_a = 1;
-  let number_a = 1;
+  let number_a = min_a;
   let compare_sign = "";
   let message = "";
   let abc_color = "";
@@ -15,27 +15,9 @@
   $: min_c = number_b + 1;
   $: c_minus_b = number_c - number_b;
   $: cc_minus_bb = number_cc - number_bb;
-  $: compareNumbers(cc_minus_bb - number_aa);
-
-  function changeNumber(number_name, is_count_up) {
-    switch (number_name) {
-      case 'a':
-        is_count_up ? number_a ++ : (number_a > min_a && number_a --);
-        break;
-      case 'b':
-        is_count_up ? number_b ++ : (number_b > min_b && number_b --);
-        break;
-      case 'c':        
-        is_count_up ? number_c ++ : (number_c > min_c && number_c --);
-        break;
-        
-      default:
-        break;
-    }
-  }
-
-  function compareNumbers(compare_aabbcc) {
-    message = "";
+  $: {
+    const compare_aabbcc = cc_minus_bb - number_aa;
+    message = "ﾠ";
     if (compare_aabbcc === 0) {
       compare_sign = "=";
       abc_color = "blue";
@@ -52,6 +34,23 @@
     } else {
       compare_sign = "<";
       abc_color = "gray";
+    }
+  }
+
+  function changeNumber(number_name, is_count_up) {
+    switch (number_name) {
+      case 'a':
+        is_count_up ? number_a ++ : (number_a > min_a && number_a --);
+        break;
+      case 'b':
+        is_count_up ? number_b ++ : (number_b > min_b && number_b --);
+        break;
+      case 'c':        
+        is_count_up ? number_c ++ : (number_c > min_c && number_c --);
+        break;
+        
+      default:
+        break;
     }
   }
 
@@ -82,58 +81,6 @@
       triples_count = `====== 총 ${count}개 ======`;
   }
 </script>
-
-<style>
-  .content {
-    text-align: center;
-  }
-  table {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  thead th,
-  .abc td {
-    padding-right: 20px;
-    font-weight: 20px;
-  }
-  th,
-  td,
-  input {
-    font-size: 25px;
-    text-align: right;
-  }
-  input {
-    width: 170px;
-  }
-  .blue {
-    color: blue;
-  }
-  .red {
-    color: red;
-  }
-  .orange {
-    color: orange;
-  }
-  .gray {
-    color: rgb(151, 150, 150);
-  }
-  textarea {
-	  width: 100%;
-	  height: 300px;
-      font-size: 15px;
-  }
-  #app {
-	  margin-top: 20px;
-  }
-  #min_a, #max_a {
-    font-size: 15px;
-    text-align: left;
-    width: 50px;
-  }
-  #min_a {
-    text-align: right;
-  }
-</style>
 
 <svelte:head>
   <title>{title}</title>
@@ -198,13 +145,66 @@
     </tbody>
   </table>
   <div id="app">
-    <input id="min_a" type="number" min={min_a} bind:value={imin_a} on:keypress={getPythagorasTriples} />
-    ≤ 𝒂 ≤ 
-    <input id="max_a" type="number" min={xmin_a} bind:value={max_a} on:keypress={getPythagorasTriples} />
-    <button on:click={getPythagorasTriples}
-    >피타고라스 공식 만족하는 수 조합 구하기</button> {triples_count}
-    <div>
-      <textarea>{pythagoras_triples}</textarea>
-    </div>
+    <form on:submit|preventDefault={getPythagorasTriples}>
+      <input id="min_a" type="number" min={min_a} bind:value={imin_a} />
+      ≤ 𝒂 ≤ 
+      <input id="max_a" type="number" min={xmin_a} bind:value={max_a} />
+      <button>피타고라스 공식 만족하는 수 조합 구하기</button> {triples_count}
+      <div>
+        <textarea>{pythagoras_triples}</textarea>
+      </div>
+    </form>
   </div>
 </div>
+
+<style>
+  .content {
+    text-align: center;
+  }
+  table {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  thead th,
+  .abc td {
+    padding-right: 20px;
+    font-weight: 20px;
+  }
+  th,
+  td,
+  input {
+    font-size: 25px;
+    text-align: right;
+  }
+  input {
+    width: 170px;
+  }
+  .blue {
+    color: blue;
+  }
+  .red {
+    color: red;
+  }
+  .orange {
+    color: orange;
+  }
+  .gray {
+    color: rgb(151, 150, 150);
+  }
+  textarea {
+	  width: 100%;
+	  height: 300px;
+      font-size: 15px;
+  }
+  #app {
+	  margin-top: 20px;
+  }
+  #min_a, #max_a {
+    font-size: 15px;
+    text-align: left;
+    width: 50px;
+  }
+  #min_a {
+    text-align: right;
+  }
+</style>
