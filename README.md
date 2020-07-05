@@ -93,7 +93,7 @@ firebase init 실행했을 때 선택하고 입력할 항목들 핵심만 뽑으
 14. $ npm start (배포를 위한 dist 폴더 재생성 후 5000포트로 잘 열리는지 확인)
 15. $ npm run deploy (배포를 위한 dist 폴더 재생성 후 firebase로 정식 배포)
 ```
-
+https://sapper-firebase-ver3.web.app/
 
 ## 에필로그
 
