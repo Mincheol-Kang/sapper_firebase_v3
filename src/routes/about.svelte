@@ -147,6 +147,9 @@ function tdMouseOver(event) {
 .selected-cubes {
 	text-align: center;
 }
+td {
+	cursor: pointer;
+}
 span {
 	text-align: center;
 }
