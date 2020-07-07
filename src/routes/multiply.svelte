@@ -7,7 +7,7 @@
         <input type="number" min={min_a} max={max_a} bind:value={number_a} on:change={showNumber_a} />
 		{getFingersWithNumber(number_a).join('')}
 		x
-        <input type="number" min={min_a} max={max_a} bind:value={number_b} />
+        <input type="number" min={min_b} max={max_a} bind:value={number_b} />
 		{getFingersWithNumber(number_b).join('')}
         <br><button>{page_title}</button>
     </form>
@@ -64,12 +64,12 @@ const fingers = {
 	5: '🖐',
 	10: '🔟'
 }
-const min_a = 1
 const max_a = 99
+let min_a = 1
+let min_b = 1
 let number_a = min_a
 let number_b = min_a
 let fingers_num_a = []
-let num_cubes = ''
 let cube_td = '1 x 1 = 1'
 let fingers_dom = new Array(100)
 let cube_table
@@ -160,6 +160,9 @@ function handleDragDrop(e) {
 	e.dataTransfer.clearData()
 	if(source_span_id === e.target.id)
 		return
+
+	min_a = number_a
+	min_b = number_b
 
 	if(source_finger === fingers[5] && source_finger === target_finger) {
 		source_parent_node.removeChild(source_span_dom)
