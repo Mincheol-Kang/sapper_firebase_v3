@@ -1,6 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
@@ -30,6 +31,9 @@ export default {
 			resolve({
 				browser: true,
 				dedupe: ['svelte']
+			}),
+			json({
+				compact: true
 			}),
 			commonjs(),
 
@@ -72,6 +76,9 @@ export default {
 			}),
 			resolve({
 				dedupe: ['svelte']
+			}),
+			json({
+				compact: true
 			}),
 			commonjs()
 		],
