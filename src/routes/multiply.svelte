@@ -59,6 +59,13 @@
 import { stores } from '@sapper/app'
 
 const { page } = stores()
+let num_a = 9
+let num_b = 9
+if($page.query.num_a !== undefined) {
+	num_a = Number($page.query.num_a)
+	num_b = Number($page.query.num_b)
+}
+
 const page_title = '곱셈을 이미지로 표시하기'
 const fingers = {
 	0: '',
@@ -72,17 +79,13 @@ const fingers = {
 const max_a = 99
 let min_a = 1
 let min_b = 1
-let number_a = 9
-let number_b = 9
+let number_a = num_a
+let number_b = num_b
 let fingers_num_a = []
 let cube_td = '1 x 1 = 1'
 let fingers_dom = new Array(100)
 let cube_table
 
-if($page.query.num_a !== undefined) {
-	number_a = Number($page.query.num_a)
-	number_b = Number($page.query.num_b)
-}
 
 for(let i = 0; i < fingers_dom.length; i ++) {
 	fingers_dom[i] = new Array(20)
