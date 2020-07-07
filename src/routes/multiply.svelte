@@ -59,8 +59,8 @@
 import { stores } from '@sapper/app'
 
 const { page } = stores()
-let num_a = 9
-let num_b = 9
+let num_a = 1
+let num_b = 1
 if($page.query.num_a !== undefined) {
 	num_a = Number($page.query.num_a)
 	num_b = Number($page.query.num_b)
