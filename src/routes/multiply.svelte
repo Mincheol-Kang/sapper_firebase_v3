@@ -79,6 +79,11 @@ let cube_td = '1 x 1 = 1'
 let fingers_dom = new Array(100)
 let cube_table
 
+if($page.query.num_a !== undefined) {
+	number_a = Number($page.query.num_a)
+	number_b = Number($page.query.num_b)
+}
+
 for(let i = 0; i < fingers_dom.length; i ++) {
 	fingers_dom[i] = new Array(20)
 }
@@ -189,10 +194,6 @@ function handleDragDrop(e) {
 		source_pp_node.removeChild(source_parent_node.previousSibling)
 		source_pp_node.removeChild(source_parent_node)
 	}
-}
-if($page.query.num_a !== undefined) {
-	number_a = Number($page.query.num_a)
-	number_b = Number($page.query.num_b)
 }
 showNumber_a()
 </script>
