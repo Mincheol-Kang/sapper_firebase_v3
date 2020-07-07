@@ -2,14 +2,16 @@
 	<title>{page_title}</title>
 </svelte:head>
 
+<h1>{page_title}</h1>
+
 <div class="form-area">
-    <form on:submit|preventDefault={showNumber_a}>
+    <form>
         <input type="number" min={min_a} max={max_a} bind:value={number_a} on:change={showNumber_a} />
 		{getFingersWithNumber(number_a).join('')}
 		x
         <input type="number" min={min_b} max={max_a} bind:value={number_b} />
 		{getFingersWithNumber(number_b).join('')}
-        <br><button>{page_title}</button>
+        <button>새로 시작하기</button>
     </form>
 </div>
 <div class="fingers-area">
@@ -226,6 +228,6 @@ input {
 	width: 60px;
 }
 button {
-	font-size: 1.8em;
+	font-size: 1em;
 }
 </style>
