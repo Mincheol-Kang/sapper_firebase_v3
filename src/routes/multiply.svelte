@@ -6,10 +6,10 @@
 
 <div class="form-area">
     <form>
-        <input type="number" min={min_a} max={max_a} bind:value={number_a} on:change={showNumber_a} />
+        <input type="number" name="number_a" min={min_a} max={max_a} bind:value={number_a} on:change={showNumber_a} />
 		{getFingersWithNumber(number_a).join('')}
 		x
-        <input type="number" min={min_b} max={max_a} bind:value={number_b} />
+        <input type="number" name="number_b" min={min_b} max={max_a} bind:value={number_b} />
 		{getFingersWithNumber(number_b).join('')}
         <button>새로 시작하기</button>
     </form>
@@ -56,6 +56,9 @@
 </div>
 
 <script>
+import { stores } from '@sapper/app'
+
+const { page } = stores()
 const page_title = '곱셈을 이미지로 표시하기'
 const fingers = {
 	0: '',
@@ -69,8 +72,8 @@ const fingers = {
 const max_a = 99
 let min_a = 1
 let min_b = 1
-let number_a = min_a
-let number_b = min_a
+let number_a = $page.query.number_a
+let number_b = $page.query.number_b
 let fingers_num_a = []
 let cube_td = '1 x 1 = 1'
 let fingers_dom = new Array(100)
