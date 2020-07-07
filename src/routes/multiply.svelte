@@ -6,10 +6,10 @@
 
 <div class="form-area">
     <form>
-        <input type="number" name="number_a" min={min_a} max={max_a} bind:value={number_a} on:change={showNumber_a} />
+        <input type="number" name="num_a" min={min_a} max={max_a} bind:value={number_a} on:change={showNumber_a} />
 		{getFingersWithNumber(number_a).join('')}
 		x
-        <input type="number" name="number_b" min={min_b} max={max_a} bind:value={number_b} />
+        <input type="number" name="num_b" min={min_b} max={max_a} bind:value={number_b} />
 		{getFingersWithNumber(number_b).join('')}
         <button>새로 시작하기</button>
     </form>
@@ -72,8 +72,8 @@ const fingers = {
 const max_a = 99
 let min_a = 1
 let min_b = 1
-let number_a = $page.query.number_a
-let number_b = $page.query.number_b
+let number_a = 9
+let number_b = 9
 let fingers_num_a = []
 let cube_td = '1 x 1 = 1'
 let fingers_dom = new Array(100)
@@ -189,6 +189,10 @@ function handleDragDrop(e) {
 		source_pp_node.removeChild(source_parent_node.previousSibling)
 		source_pp_node.removeChild(source_parent_node)
 	}
+}
+if($page.query.num_a !== undefined) {
+	number_a = Number($page.query.num_a)
+	number_b = Number($page.query.num_b)
 }
 showNumber_a()
 </script>
