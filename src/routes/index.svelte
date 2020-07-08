@@ -33,18 +33,12 @@
 </style>
 
 <svelte:head>
-	<title>Sapper 프로젝트 템플릿</title>
+	<title>수학 놀이터</title>
 </svelte:head>
 
-<h1>짱 잘했또!</h1>
+<h1>수학 놀이터</h1>
 
 <figure>
 	<img alt='Success Kid' src='successkid.jpg'>
-	<figcaption>Sapper와 함께 즐겨보자규!</figcaption>
+	<figcaption>수학을 재밌게 가지고 놀아보자규!</figcaption>
 </figure>
-
-<p><strong> {my_message} </strong></p>
-
-<script>
-const my_message = '이 문장은 svelte의 const 변수에 저장한 문자열입니다. (이제 얼추 안정화된 듯..)'
-</script>

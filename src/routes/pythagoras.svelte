@@ -1,5 +1,5 @@
 <script>
-  const title = "Pythagoras Triples";
+  const title = "피타고라스 공식 만족하는 수 조합 구하기";
   const min_a = 1;
   let number_a = min_a;
   let compare_sign = "";
