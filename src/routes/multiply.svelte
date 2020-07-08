@@ -25,7 +25,6 @@
 				ondragover="return false"
 				on:dragstart={handleDragStart}
 				on:drop={handleDragDrop}
-				bind:this={fingers_dom[i][x]}
 			>{finger}</span>
 		{/each}
 		</div>
@@ -83,16 +82,28 @@ let number_a = num_a
 let number_b = num_b
 let fingers_num_a = []
 let cube_td = '1 x 1 = 1'
-let fingers_dom = new Array(100)
 let cube_table
-
-
-for(let i = 0; i < fingers_dom.length; i ++) {
-	fingers_dom[i] = new Array(20)
-}
+let source_span_dom
+let fingers_target_node
+let fingers_modified = false
+let cloned_span_id = 0
 
 const showNumber_a = () => {
-	fingers_num_a = getFingersWithNumber(number_a)
+	if(fingers_modified) {
+		const added_fingers = getFingersWithNumber(number_b)
+		const added_parent_node = fingers_target_node.parentNode
+		console.log(added_fingers)
+		added_fingers.forEach(added_finger => {
+			const added_target_node = fingers_target_node.cloneNode(false)
+			added_target_node.textContent = added_finger
+			added_target_node.id += `-${cloned_span_id++}` 
+			added_parent_node.appendChild(added_target_node)
+			min_a = number_a
+			console.log(added_parent_node)
+		})
+	} else {
+		fingers_num_a = getFingersWithNumber(number_a)
+	}
 }
 
 const getFingersWithNumber = (target_number = min_a) => {
@@ -150,32 +161,27 @@ function getKeyByValue(object, value) {
 }
 function handleDragStart(e) {
 	e.dataTransfer.dropEffect = "copy"
-	e.dataTransfer.setData("text", e.target.getAttribute('id'))
+	source_span_dom = e.target
+	console.log(source_span_dom)
 }
 function handleDragDrop(e) {
-	const source_span_id = e.dataTransfer.getData("text")
-	const source_span_id_array = source_span_id.split('-')
-	const i = Number(source_span_id_array[1])
-	const x = Number(source_span_id_array[2])
-	const source_span_dom = fingers_dom[i][x]
 	const source_finger = source_span_dom.textContent.trim()
 	const target_finger = e.target.textContent.trim()
 	const source_number = getKeyByValue(fingers,source_finger)
 	const target_number = getKeyByValue(fingers,target_finger)
-	const target_id_array = e.target.id.split('-')
-	const ti = Number(target_id_array[1])
 	const sum_number = source_number + target_number
 	const sum_fingers = getFingersWithNumber(sum_number)
 	const source_parent_node = source_span_dom.parentNode
 	const target_parent_node = e.target.parentNode
 	const source_pp_node = source_parent_node.parentNode
 
-	e.dataTransfer.clearData()
-	if(source_span_id === e.target.id)
+	if(source_span_dom.id === e.target.id)
 		return
 
 	min_a = number_a
 	min_b = number_b
+	fingers_modified = true
+	fingers_target_node = e.target
 
 	if(source_finger === fingers[5] && source_finger === target_finger) {
 		source_parent_node.removeChild(source_span_dom)
