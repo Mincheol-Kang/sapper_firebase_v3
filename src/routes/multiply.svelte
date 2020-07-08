@@ -9,7 +9,7 @@
         <input type="number" name="num_a" min={min_a} max={max_a} bind:value={number_a} on:change={showNumber_a} />
 		{getFingersWithNumber(number_a).join('')}
 		x
-        <input type="number" name="num_b" min={min_b} max={max_a} bind:value={number_b} />
+        <input type="number" name="num_b" min={min_b} max={max_b} bind:value={number_b} />
 		{getFingersWithNumber(number_b).join('')}
         <button>새로 시작하기</button>
     </form>
@@ -46,7 +46,7 @@
 		<tr>
 			<td class="cube-number row-number">{y+1}</td>
 			{#each Array(number_a) as _, x}
-			<td on:mouseover={tdMouseOver} id="cube-{y}-{x}">◼︎</td>
+			<td on:mouseover={cubeMouseOver} id="cube-{y}-{x}">◼︎</td>
 			{/each}
 		</tr>
 		{/each}
@@ -75,35 +75,19 @@ const fingers = {
 	5: '🖐',
 	10: '🔟'
 }
-const max_a = 99
+let max_a = 99
+let max_b = max_a
 let min_a = 1
-let min_b = 1
+let min_b = min_a
 let number_a = num_a
 let number_b = num_b
 let fingers_num_a = []
 let cube_td = '1 x 1 = 1'
 let cube_table
 let source_span_dom
-let fingers_target_node
-let fingers_modified = false
-let cloned_span_id = 0
 
 const showNumber_a = () => {
-	if(fingers_modified) {
-		const added_fingers = getFingersWithNumber(number_b)
-		const added_parent_node = fingers_target_node.parentNode
-		console.log(added_fingers)
-		added_fingers.forEach(added_finger => {
-			const added_target_node = fingers_target_node.cloneNode(false)
-			added_target_node.textContent = added_finger
-			added_target_node.id += `-${cloned_span_id++}` 
-			added_parent_node.appendChild(added_target_node)
-			min_a = number_a
-			console.log(added_parent_node)
-		})
-	} else {
-		fingers_num_a = getFingersWithNumber(number_a)
-	}
+	fingers_num_a = getFingersWithNumber(number_a)
 }
 
 const getFingersWithNumber = (target_number = min_a) => {
@@ -132,7 +116,7 @@ const getFingersWithNumber = (target_number = min_a) => {
 	}
 	return finger_number
 }
-function tdMouseOver(event) {
+function cubeMouseOver(event) {
 	const cube_rows = cube_table.getElementsByTagName('tr')
 	const cube_id = event.target.id.split('-')
 	const cube_row = Number(cube_id[1])
@@ -162,7 +146,6 @@ function getKeyByValue(object, value) {
 function handleDragStart(e) {
 	e.dataTransfer.dropEffect = "copy"
 	source_span_dom = e.target
-	console.log(source_span_dom)
 }
 function handleDragDrop(e) {
 	const source_finger = source_span_dom.textContent.trim()
@@ -178,10 +161,8 @@ function handleDragDrop(e) {
 	if(source_span_dom.id === e.target.id)
 		return
 
-	min_a = number_a
+	min_a = max_a = number_a
 	min_b = number_b
-	fingers_modified = true
-	fingers_target_node = e.target
 
 	if(source_finger === fingers[5] && source_finger === target_finger) {
 		source_parent_node.removeChild(source_span_dom)
