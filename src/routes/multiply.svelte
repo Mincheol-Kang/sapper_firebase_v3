@@ -36,17 +36,17 @@
 	</div>
 	<table id="cube-table" bind:this={cube_table}>
 		<thead>
-			<th> </th>
+			<th></th>
 		{#each Array(number_a) as _, x}
 			<th class="cube-number">{x+1}</th>
 		{/each}
 		</thead>
 		<tbody>
 		{#each Array(number_b) as _, y}
-		<tr>
+		<tr class="cube-row">
 			<td class="cube-number row-number">{y+1}</td>
 			{#each Array(number_a) as _, x}
-			<td on:mouseover={cubeMouseOver} id="cube-{y}-{x}">◼︎</td>
+			<td class="cube-cell" on:mouseover={cubeMouseOver} id="cube-{y}-{x}"></td>
 			{/each}
 		</tr>
 		{/each}
@@ -127,15 +127,15 @@ function cubeMouseOver(event) {
 
 	for(let y = 0; y < cube_rows.length; y++) {
 		currnet_row_cells = cube_rows[y].getElementsByTagName('td')
-		for(let x = 0; x < currnet_row_cells.length; x++) {
-			currnet_row_cells[x].style.color = ''
+		for(let x = 1; x < currnet_row_cells.length; x++) {
+			currnet_row_cells[x].style.backgroundColor = ''
 		}
 	}
 
 	for(let y = 0; y < cube_row+1; y++) {
 		currnet_row_cells = cube_rows[y].getElementsByTagName('td')
 		for(let x = 1; x < cube_cell+2; x++) {
-			currnet_row_cells[x].style.color = 'orange'
+			currnet_row_cells[x].style.backgroundColor = 'orange'
 		}
 	}
 }
@@ -207,16 +207,33 @@ showNumber_a()
 	top: 1rem;
 	right: 1rem;
 	font-size: 25px;
-	line-height: 0.9em;
+	line-height: 0.8em;
+	background-color: white;
+}
+.cube-row {
+	padding: 0px;
+	margin: 0px;
+}
+.cube-cell {
+	border: 1px solid white;
+	width: 20px;
+	height: 20px;
+	padding: 0px;
+	margin: 0px;
+	background-color: #404040;
 }
 .cube-number {
 	font-size: 10px;
 }
 .row-number{
 	text-align: right;
+	padding-right: 5px;
 }
 .selected-cubes {
 	text-align: right;
+}
+table {
+	border-spacing: 0px;
 }
 td {
 	cursor: pointer;
