@@ -1,5 +1,5 @@
 <style>
-	h1, figure, p {
+	h1, figure {
 		text-align: center;
 		margin: 0 auto;
 	}
@@ -21,10 +21,6 @@
 		margin: 0 0 1em 0;
 	}
 
-	p {
-		margin: 1em auto;
-	}
-
 	@media (min-width: 480px) {
 		h1 {
 			font-size: 4em;
@@ -33,12 +29,16 @@
 </style>
 
 <svelte:head>
-	<title>수학 놀이터</title>
+	<title>{title}</title>
 </svelte:head>
 
-<h1>수학 놀이터</h1>
+<h1>{title}</h1>
 
 <figure>
 	<img alt='Success Kid' src='successkid.jpg'>
 	<figcaption>수학을 재밌게 가지고 놀아보자규!</figcaption>
 </figure>
+
+<script>
+const title = '수학 놀이터'
+</script>
