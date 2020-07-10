@@ -4,6 +4,7 @@ const page_title = '예정일로 임신주수 구하기'
 let due_date = ''
 let preg_week = ''
 let show_bmi = false
+let formatted_date = ''
 
 function getPregWd(dueday_str, baseday_str="0") {
     if (dueday_str.length < 1)
@@ -26,7 +27,13 @@ function getPregWd(dueday_str, baseday_str="0") {
     return `(${preg_wd}, D${D_day}일)`;
 } // ~ 예정일로 임신주차 & D-day 계산하기
 
-$: preg_week = getPregWd(due_date)
+$: {
+    if(due_date.length > 0) {
+        const date_items = due_date.split('-')
+        formatted_date = `${date_items[0]}/${date_items[1]}/${date_items[2]}`
+        preg_week = getPregWd(formatted_date)
+    }
+}
 
 const changeCheckbox = () => {
 	show_bmi = !show_bmi
