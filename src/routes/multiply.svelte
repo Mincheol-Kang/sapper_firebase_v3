@@ -4,7 +4,7 @@
 
 <h1>{page_title}</h1>
 
-<div class="form-area">
+<div>
     <form>
         <input type="number" name="num_a" min={min_a} max={max_a} bind:value={number_a} on:change={showNumber_a} />
 		{getFingersWithNumber(number_a).join('')}
