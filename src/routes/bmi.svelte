@@ -63,8 +63,8 @@ $: {
                 </div>
             </form>
             <p class="fsXXL">신체질량지수(BMI)는
-                <b class="em1" id="bmiVal">{bmiVal}</b>로 <b class="em4" id="evalWeight">{evalWeight}</b>입니다.
-                평균체중은 <b class="em4" id="avlVal">{avlVal}</b>Kg입니다.</p>
+                <b class="em1" id="bmiVal">{bmiVal}</b>로 <b class="em4" id="evalWeight">{evalWeight}</b>입니다.<br>
+                키 {bmi_height}cm의 평균체중은 <b class="em4" id="avlVal">{avlVal}</b>Kg입니다.</p>
 
             <!-- chart1bmi1 -->
             <div class="chart1bmi1">
