@@ -3,18 +3,6 @@
 </svelte:head>
 
 <h1>{page_title}</h1>
-<div class="tooltip cursor-pointer">💬
-	<span class="tooltiptext">
-		이곳은 곱셈을 매우 직관적으로 이해하기 위해 마련된 공간입니다.
-		10 이상의 수는 "2, 5, 10"으로 구성될 수 있는데요.
-		다섯 손가락으로 된 두 손을 가지고 수를 세는 
-		지극히 인간적인 방식이 바로 십진수임을 이해하고,
-		곱셈은 본질적으로 면적을 나타낸다는 사실을 아는 것이 아주 중요합니다.
-		그래서 이러한 개념들을 직관적으로 알려주기 위해 만들어진 곳이 곱셈 놀이터입니다.
-		아이들에게 무작정 구구단을 외우게 하는 대신,
-		구구단의 곱셈이 왜 그런 값을 내는지 제대로 이해하게 해주시기 바랍니다.
-	</span>
-</div>
 
 <div>
     <form>
@@ -24,13 +12,28 @@
         <input type="number" name="num_b" min={min_b} max={max_b} bind:value={number_b} />
 		{getFingersWithNumber(number_b).join('')}
         <button>새로 시작하기</button>
+		<div class="tooltip cursor-pointer">💬
+			<span class="tooltiptext-page">
+				<p>곱셈 놀이터 소개</p>
+				<p>
+				이곳은 곱셈을 매우 직관적으로 이해하기 위해 마련된 공간입니다.
+				10 이상의 수는 "2, 5, 10"으로 구성될 수 있는데요.
+				다섯 손가락으로 된 두 손을 가지고 수를 세는 
+				지극히 인간적인 방식이 바로 십진수임을 이해하고,
+				곱셈은 본질적으로 면적을 나타낸다는 사실을 아는 것이 아주 중요합니다.</p>
+				<p>
+				그래서 이러한 개념들을 직관적으로 알려주기 위해 만들어진 곳이 곱셈 놀이터입니다.
+				아이들에게 무작정 구구단을 외우게 하는 대신,
+				구구단의 곱셈이 왜 그런 값을 내는지 제대로 이해하게 해주시기 바랍니다.</p>
+			</span>
+		</div>
     </form>
 	<div class="hand-usage">
 		{#if number_a > 2 || number_b > 2}
 		손모양 중 👌🏽=3, ✊🏽=4 입니다. ^^;;<br>
 		{/if}
 		{#if number_b > 1}
-		아래 손가락 이미지를 끌어다 서로 합치면, 더해진 값으로 손 모양이 변신합니다!
+		(PC에서) 아래 손가락 이미지를 끌어다 서로 합치면, 더해진 값으로 손 모양이 변신합니다!
 		{:else}
 		두번째 숫자를 올려보세요! 곱셈 수식이 아래에 손모양으로 표시됩니다.
 		{/if}
@@ -79,7 +82,7 @@
 	<div class="selected-cubes">
 		<div class="tooltip hand-usage cursor-pointer cube-usage">
 			큐브 테이블 사용법 보기
-			<span class="tooltiptext">
+			<span class="tooltiptext-cube">
 				PC에선 마우스 커서를 아래 큐브들 중 하나 위에 올려보고, 
 				스마트폰에선 그냥 손가락으로 큐브들 중 하나를 터치해보세요.
 				곱셈이 면적으로 나타나는 걸 확인할 수 있습니다.
@@ -226,26 +229,50 @@ showNumber_a()
 .tooltip {
 	position: relative;
 	display: inline-block;
-	font-size: 12px;
+	font-size: 13px;
 }
 .cube-usage {
 	border-bottom: 1px dotted #404040;
 }
-.tooltip .tooltiptext {
+.tooltip .tooltiptext-page {
 	visibility: hidden;
-	width: 180px;
 	background-color: #404040;
 	color: #fff;
-	text-align: center;
+	text-align: justify;
 	border-radius: 6px;
-	padding: 5px;
+	padding: 0px 13px;
 	position: absolute;
 	z-index: 1;
 	top: 150%;
 	left: 50%;
+	width: 350px;
+	margin-left: -316px;
+}
+.tooltip .tooltiptext-page::after {
+	content: "";
+	position: absolute;
+	bottom: 100%;
+	left: 84%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent transparent #404040 transparent;
+}
+.tooltip .tooltiptext-cube {
+	visibility: hidden;
+	background-color: #404040;
+	color: #fff;
+	text-align: justify;
+	border-radius: 6px;
+	padding: 10px 10px;
+	position: absolute;
+	z-index: 1;
+	top: 150%;
+	left: 50%;
+	width: 180px;
 	margin-left: -132px;
 }
-.tooltip .tooltiptext::after {
+.tooltip .tooltiptext-cube::after {
 	content: "";
 	position: absolute;
 	bottom: 100%;
@@ -255,7 +282,10 @@ showNumber_a()
 	border-style: solid;
 	border-color: transparent transparent #404040 transparent;
 }
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext-page {
+	visibility: visible;
+}
+.tooltip:hover .tooltiptext-cube {
 	visibility: visible;
 }
 .fingers-area {
@@ -310,9 +340,6 @@ showNumber_a()
 	font-size: 12px;
 	margin-top: 0.5em;
 	margin-bottom: 1em;
-}
-h1 {
-	display: inline-block;
 }
 table {
 	border-spacing: 0px;
