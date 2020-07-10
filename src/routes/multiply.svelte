@@ -3,6 +3,18 @@
 </svelte:head>
 
 <h1>{page_title}</h1>
+<div class="tooltip cursor-pointer">💬
+	<span class="tooltiptext">
+		이곳은 곱셈을 매우 직관적으로 이해하기 위해 마련된 공간입니다.
+		10 이상의 수는 "2, 5, 10"으로 구성될 수 있는데요.
+		다섯 손가락으로 된 두 손을 가지고 수를 세는 
+		지극히 인간적인 방식이 바로 십진수임을 이해하고,
+		곱셈은 본질적으로 면적을 나타낸다는 사실을 아는 것이 아주 중요합니다.
+		그래서 이러한 개념들을 직관적으로 알려주기 위해 만들어진 곳이 곱셈 놀이터입니다.
+		아이들에게 무작정 구구단을 외우게 하는 대신,
+		구구단의 곱셈이 왜 그런 값을 내는지 제대로 이해하게 해주시기 바랍니다.
+	</span>
+</div>
 
 <div>
     <form>
@@ -65,9 +77,9 @@
 		</table>
 	</div>
 	<div class="selected-cubes">
-		<div class="tooltip hand-usage cursor-pointer">
+		<div class="tooltip hand-usage cursor-pointer cube-usage">
 			큐브 테이블 사용법 보기
-			<span class="tooltiptext cube-usage">
+			<span class="tooltiptext">
 				PC에선 마우스 커서를 아래 큐브들 중 하나 위에 올려보고, 
 				스마트폰에선 그냥 손가락으로 큐브들 중 하나를 터치해보세요.
 				곱셈이 면적으로 나타나는 걸 확인할 수 있습니다.
@@ -212,36 +224,39 @@ showNumber_a()
 
 <style>
 .tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted #404040;
+	position: relative;
+	display: inline-block;
+	font-size: 12px;
+}
+.cube-usage {
+	border-bottom: 1px dotted #404040;
 }
 .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 180px;
-  background-color: #404040;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  top: 150%;
-  left: 50%;
-  margin-left: -125px;
+	visibility: hidden;
+	width: 180px;
+	background-color: #404040;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	top: 150%;
+	left: 50%;
+	margin-left: -132px;
 }
 .tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 75%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #404040 transparent;
+	content: "";
+	position: absolute;
+	bottom: 100%;
+	left: 70%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent transparent #404040 transparent;
 }
 .tooltip:hover .tooltiptext {
-  visibility: visible;
+	visibility: visible;
 }
 .fingers-area {
 	font-size: 4.1em;
@@ -295,6 +310,9 @@ showNumber_a()
 	font-size: 12px;
 	margin-top: 0.5em;
 	margin-bottom: 1em;
+}
+h1 {
+	display: inline-block;
 }
 table {
 	border-spacing: 0px;
