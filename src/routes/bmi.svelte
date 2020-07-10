@@ -1,5 +1,4 @@
 <script>
-const page_title = 'BMI 구하기'
 let bmi_height = 160
 let bmi_weight = 55
 let bim_pointer = '0%'
@@ -42,10 +41,6 @@ $: {
     bim_pointer = deco1left;
 }
 </script>
-
-<svelte:head>
-	<title>{page_title}</title>
-</svelte:head>
 
 <div id="container">
     <div id="body_content" class="body_content">
