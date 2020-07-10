@@ -27,6 +27,10 @@ function getPregWd(dueday_str, baseday_str="0") {
 } // ~ 예정일로 임신주차 & D-day 계산하기
 
 $: preg_week = getPregWd(due_date)
+
+const changeCheckbox = () => {
+	show_bmi = !show_bmi
+}
 </script>
 
 <svelte:head>
@@ -39,7 +43,9 @@ $: preg_week = getPregWd(due_date)
 	<div class="form-area">
 		<input type="date" bind:value={due_date} />
 		<div class="preg-week">{preg_week}</div>
-		<input class="check-box" type="checkbox" bind:checked={show_bmi} /> BMI 구하기
+		
+		<input class="check-box" type="checkbox" bind:checked={show_bmi} />
+		<span class="check-text noselect" on:click={changeCheckbox}>BMI 구하기</span>
 	</div>
 	<div class="bmi-area {show_bmi ? '' : 'hidden'}">
 		<Bmi/>
@@ -59,6 +65,18 @@ input, .preg-week {
 }
 .check-box {
 	margin-top: 1em;
+}
+.check-text {
+	cursor: pointer;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 .bmi-area {
 	margin-top: 3em;
