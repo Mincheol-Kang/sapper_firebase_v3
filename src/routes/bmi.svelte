@@ -50,7 +50,7 @@ $: {
                     키:
                     <input type="number"
                         name="bmiHeight" id="bmiHeight"
-                        bind:value="{bmi_height}">cm,&nbsp;&nbsp;
+                        bind:value="{bmi_height}">cm,<br>
                     체중:
                     <input type="number"
                         name="bmiWeight" id="bmiWeight"
