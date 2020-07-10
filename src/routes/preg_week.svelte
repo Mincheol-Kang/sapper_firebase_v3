@@ -1,6 +1,6 @@
 <script>
 import Bmi from './bmi.svelte'
-const page_title = '예정일로 임신주차 구하기'
+const page_title = '예정일로 임신주수 구하기'
 let due_date = ''
 let preg_week = ''
 let show_bmi = false
@@ -52,6 +52,10 @@ $: preg_week = getPregWd(due_date)
 }
 input, .preg-week {
 	font-size: 1.5em;
+}
+.preg-week {
+	color: #080;
+	font-weight: bold;
 }
 .check-box {
 	margin-top: 1em;
