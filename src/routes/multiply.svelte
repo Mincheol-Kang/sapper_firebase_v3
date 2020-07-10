@@ -13,6 +13,16 @@
 		{getFingersWithNumber(number_b).join('')}
         <button>새로 시작하기</button>
     </form>
+	<div class="hand-usage">
+		{#if number_a > 2 || number_b > 2}
+		손모양 중 👌🏽=3, ✊🏽=4 입니다. ^^;;<br>
+		{/if}
+		{#if number_b > 1}
+		아래 손가락 이미지를 끌어다 서로 합치면, 더해진 값으로 손 모양이 변신합니다!
+		{:else}
+		두번째 숫자를 올려보세요! 곱셈 수식이 아래에 손모양으로 표시됩니다.
+		{/if}
+	</div>
 </div>
 <div class="fingers-area">
 	{#each Array(number_b) as _, i}
@@ -34,24 +44,36 @@
 	<div class="selected-cubes">
 		{cube_td}
 	</div>
-	<table id="cube-table" bind:this={cube_table}>
-		<thead>
-			<th></th>
-		{#each Array(number_a) as _, x}
-			<th class="cube-number">{x+1}</th>
-		{/each}
-		</thead>
-		<tbody>
-		{#each Array(number_b) as _, y}
-		<tr class="cube-row">
-			<td class="cube-number row-number">{y+1}</td>
+	<div>
+		<table bind:this={cube_table}>
+			<thead>
+				<th></th>
 			{#each Array(number_a) as _, x}
-			<td class="cube-cell" on:mouseover={cubeMouseOver} id="cube-{y}-{x}"></td>
+				<th class="cube-number">{x+1}</th>
 			{/each}
-		</tr>
-		{/each}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+			{#each Array(number_b) as _, y}
+			<tr class="cube-row">
+				<td class="cube-number row-number">{y+1}</td>
+				{#each Array(number_a) as _, x}
+				<td class="cube-cell" on:mouseover={cubeMouseOver} id="cube-{y}-{x}"></td>
+				{/each}
+			</tr>
+			{/each}
+			</tbody>
+		</table>
+	</div>
+	<div class="selected-cubes">
+		<div class="tooltip hand-usage cursor-pointer">
+			큐브 테이블 사용법 보기
+			<span class="tooltiptext cube-usage">
+				PC에선 마우스 커서를 아래 큐브들 중 하나 위에 올려보고, 
+				스마트폰에선 그냥 손가락으로 큐브들 중 하나를 터치해보세요.
+				곱셈이 면적으로 나타나는 걸 확인할 수 있습니다.
+			</span>
+		</div>
+	</div>
 </div>
 
 <script>
@@ -189,12 +211,47 @@ showNumber_a()
 </script>
 
 <style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #404040;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 180px;
+  background-color: #404040;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 50%;
+  margin-left: -125px;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 75%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #404040 transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 .fingers-area {
 	font-size: 4.1em;
 	line-height: 1.1em;
 }
 .finger-dom {
 	cursor: move;
+}
+.cursor-pointer {
+	cursor: pointer;
 }
 .how-many {
 	float: left;
@@ -207,8 +264,12 @@ showNumber_a()
 	top: 1rem;
 	right: 1rem;
 	font-size: 25px;
-	line-height: 0.8em;
 	background-color: white;
+	text-align: right;
+}
+.selected-cubes {
+	min-width: 5em;
+	text-align: right;
 }
 .cube-row {
 	padding: 0px;
@@ -229,11 +290,16 @@ showNumber_a()
 	text-align: right;
 	padding-right: 5px;
 }
-.selected-cubes {
-	text-align: right;
+.hand-usage {
+	color: blue;
+	font-size: 12px;
+	margin-top: 0.5em;
+	margin-bottom: 1em;
 }
 table {
 	border-spacing: 0px;
+	width: auto;
+    float: right;
 }
 td {
 	cursor: pointer;
