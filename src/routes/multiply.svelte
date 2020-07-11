@@ -55,8 +55,13 @@
 	{/each}
 </div>
 <div class="cube-area">
-	<div class="selected-cubes">
-		{cube_td}
+	<div class="cube-top">
+		<div class="close-button cursor-pointer">
+			[-]
+		</div>
+		<div class="selected-cubes">
+			{cube_td}
+		</div>
 	</div>
 	<div>
 		<table bind:this={cube_table}>
@@ -306,7 +311,19 @@ showNumber_a()
 	-moz-box-shadow: -5px -4px 5px -1px rgba(0,0,0,0.51);
 	box-shadow: -5px -4px 5px -1px rgba(0,0,0,0.51);
 }
+.cube-top {
+	border: 0px solid #404040;
+}
+.close-button {
+	position: absolute;
+    top: 5px;
+    left: 10px;
+	display: inline-block;
+	text-align: left;
+	font-size: 15px;
+}
 .selected-cubes {
+	display: inline-block;
 	min-width: 5em;
 	text-align: right;
 }
