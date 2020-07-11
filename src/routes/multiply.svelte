@@ -300,6 +300,11 @@ showNumber_a()
 	font-size: 25px;
 	background-color: white;
 	text-align: right;
+	border: 1px solid #404040;
+	padding: 0px 5px;
+	-webkit-box-shadow: -5px -4px 5px -1px rgba(0,0,0,0.51);
+	-moz-box-shadow: -5px -4px 5px -1px rgba(0,0,0,0.51);
+	box-shadow: -5px -4px 5px -1px rgba(0,0,0,0.51);
 }
 .selected-cubes {
 	min-width: 5em;
