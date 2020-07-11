@@ -263,210 +263,230 @@ function handleDragDrop(e) {
 </script>
 
 <style>
-.page-usage {
-	background-color: #404040;
-	color: #fff;
-	font-size: 13px;
-	text-align: justify;
-	border-radius: 6px;
-	padding: 0px 15px;
-	border-width: 2px;
-	border-style: solid;
-	border-color: transparent transparent #404040 transparent;
-	width: 250px;
-}
-.tooltip {
-	position: relative;
-	display: inline-block;
-	font-size: 13px;
-}
+.page-usage,
 .tooltip .tooltiptext-cube {
-	visibility: hidden;
-	background-color: #404040;
-	color: #fff;
-	text-align: justify;
-	border-radius: 6px;
-	padding: 0px 13px;
-	position: absolute;
-	z-index: 1;
-	bottom: 140%;
-	left: 50%;
-	width: 180px;
-	margin-left: -132px;
-	-webkit-box-shadow: 0px 0px 11px 5px white;
-	-moz-box-shadow: 0px 0px 11px 5px white;
-	box-shadow: 0px 0px 11px 5px white;
+  background-color: #404040;
+  color: #fff;
+  text-align: justify;
+  border-radius: 6px;
 }
-.tooltip .tooltiptext-cube::after {
-	content: " ";
-	position: absolute;
-	top: 100%;
-	left: 65%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: #404040 transparent transparent transparent;
+
+.tooltip .tooltiptext-close,
+.tooltip .tooltiptext-cube {
+  -webkit-box-shadow: 0 0 11px 5px #fff;
+  -moz-box-shadow: 0 0 11px 5px #fff;
 }
-.tooltip:hover .tooltiptext-cube {
-	visibility: visible;
+
+.close-button,
+.selected-cubes,
+.tooltip {
+  display: inline-block;
 }
-.tooltip .tooltiptext-close {
-	visibility: hidden;
-	background-color: #404040;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 10px 10px;
-	position: absolute;
-	z-index: 1;
-	bottom: 100%;
-	left: 50%;
-	width: 150px;
-	margin-left: -153px;
-	-webkit-box-shadow: 0px 0px 11px 5px white;
-	-moz-box-shadow: 0px 0px 11px 5px white;
-	box-shadow: 0px 0px 11px 5px white;
+
+.page-usage {
+  font-size: 13px;
+  padding: 0 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent transparent #404040;
+  width: 250px;
 }
-.tooltip .tooltiptext-close::after {
-	content: " ";
-	position: absolute;
-	top: 100%;
-	left: 90%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: #404040 transparent transparent transparent;
-}
-.tooltip:hover .tooltiptext-close {
-	visibility: visible;
-}
-.tooltip .tooltiptext-open {
-	visibility: hidden;
-	background-color: #404040;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 10px 10px;
-	position: absolute;
-	z-index: 1;
-	bottom: 100%;
-	left: 50%;
-	width: 150px;
-	margin-left: -153px;
-	-webkit-box-shadow: 0px 0px 11px 5px white;
-	-moz-box-shadow: 0px 0px 11px 5px white;
-	box-shadow: 0px 0px 11px 5px white;
-}
+
+.tooltip .tooltiptext-close::after,
+.tooltip .tooltiptext-cube::after,
 .tooltip .tooltiptext-open::after {
-	content: " ";
-	position: absolute;
-	top: 100%;
-	left: 90%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: #404040 transparent transparent transparent;
+  content: " ";
+  top: 100%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #404040 transparent transparent;
 }
+
+.tooltip {
+  position: relative;
+  font-size: 13px;
+}
+
+.tooltip .tooltiptext-cube {
+  visibility: hidden;
+  padding: 0 13px;
+  position: absolute;
+  z-index: 1;
+  bottom: 140%;
+  left: 50%;
+  width: 180px;
+  margin-left: -132px;
+  box-shadow: 0 0 11px 5px #fff;
+}
+
+.tooltip .tooltiptext-cube::after {
+  position: absolute;
+  left: 65%;
+  margin-left: -5px;
+}
+
+.tooltip:hover .tooltiptext-cube {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext-close,
+.tooltip .tooltiptext-open {
+  visibility: hidden;
+  background-color: #404040;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  z-index: 1;
+  bottom: 100%;
+  width: 150px;
+  position: absolute;
+}
+
+.tooltip .tooltiptext-close {
+  left: 50%;
+  margin-left: -153px;
+  box-shadow: 0 0 11px 5px #fff;
+}
+
+.tooltip .tooltiptext-close::after {
+  position: absolute;
+  left: 90%;
+  margin-left: -5px;
+}
+
+.tooltip:hover .tooltiptext-close {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext-open {
+  left: 50%;
+  margin-left: -153px;
+  -webkit-box-shadow: 0 0 11px 5px #fff;
+  -moz-box-shadow: 0 0 11px 5px #fff;
+  box-shadow: 0 0 11px 5px #fff;
+}
+
+.tooltip .tooltiptext-open::after {
+  position: absolute;
+  left: 90%;
+  margin-left: -5px;
+}
+
 .tooltip:hover .tooltiptext-open {
-	visibility: visible;
+  visibility: visible;
 }
+
 .fingers-area {
-	font-size: 4.1em;
-	line-height: 1.1em;
+  font-size: 4.1em;
+  line-height: 1.1em;
 }
+
 .finger-dom {
-	cursor: move;
+  cursor: move;
 }
-.cursor-pointer {
-	cursor: pointer;
-}
-.how-many {
-	float: left;
-	font-size: 14px;
-	color: gray;
-	width: 50px;
-}
-.cube-area {
-	position: fixed;
-	bottom: 1rem;
-	right: 1rem;
-	font-size: 25px;
-	background-color: white;
-	text-align: right;
-	border: 1px solid #404040;
-	padding: 0px 5px;
-	-webkit-box-shadow: -5px -4px 5px -1px rgba(0,0,0,0.51);
-	-moz-box-shadow: -5px -4px 5px -1px rgba(0,0,0,0.51);
-	box-shadow: -5px -4px 5px -1px rgba(0,0,0,0.51);
-}
-.cube-bottom {
-	border: 0px solid #404040;
-	min-width: 0.8em;
-	min-height: 1.2em;
-}
-.close-button {
-	position: absolute;
-    bottom: 6px;
-    right: 5px;
-	display: inline-block;
-	text-align: right;
-	font-size: 15px;
-}
-.selected-cubes {
-	display: inline-block;
-	min-width: 6em;
-	text-align: right;
-}
-.cube-row {
-	padding: 0px;
-	margin: 0px;
-}
-.cube-cell {
-	border: 1px solid white;
-	width: 20px;
-	height: 20px;
-	padding: 0px;
-	margin: 0px;
-	background-color: #404040;
-}
-.cube-number {
-	font-size: 10px;
-}
-.row-number{
-	text-align: right;
-	padding-right: 5px;
-}
-.blue-12 {
-	color: blue;
-	font-size: 12px;
-}
-.hand-usage {
-	margin-top: 0.5em;
-	margin-bottom: 1em;
-}
-.cube-usage {
-	position: absolute;
-    bottom: 8px;
-    right: 35px;
-	border-bottom: 1px dotted #404040;
-}
-table {
-	border-spacing: 0px;
-	margin-top: 8px;
-	width: auto;
-    float: right;
-}
-th {
-	text-align: center;
-}
+
+.cursor-pointer,
 td {
-	cursor: pointer;
+  cursor: pointer;
 }
+
+.how-many {
+  float: left;
+  font-size: 14px;
+  color: gray;
+  width: 50px;
+}
+
+.cube-area {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 25px;
+  background-color: #fff;
+  text-align: right;
+  border: 1px solid #404040;
+  padding: 0 5px;
+  -webkit-box-shadow: -5px -4px 5px -1px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: -5px -4px 5px -1px rgba(0, 0, 0, 0.51);
+  box-shadow: -5px -4px 5px -1px rgba(0, 0, 0, 0.51);
+}
+
+.cube-cell,
+.cube-row {
+  padding: 0;
+  margin: 0;
+}
+
+.cube-bottom {
+  border: 0 solid #404040;
+  min-width: 0.8em;
+  min-height: 1.2em;
+}
+
+.close-button {
+  position: absolute;
+  bottom: 6px;
+  right: 5px;
+  text-align: right;
+  font-size: 15px;
+}
+
+.selected-cubes {
+  min-width: 6em;
+  text-align: right;
+}
+
+.cube-cell {
+  border: 1px solid #fff;
+  width: 20px;
+  height: 20px;
+  background-color: #404040;
+}
+
+.cube-number {
+  font-size: 10px;
+}
+
+.row-number {
+  text-align: right;
+  padding-right: 5px;
+}
+
+.blue-12 {
+  color: #00f;
+  font-size: 12px;
+}
+
+.hand-usage {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.cube-usage {
+  position: absolute;
+  bottom: 8px;
+  right: 35px;
+  border-bottom: 1px dotted #404040;
+}
+
+table {
+  border-spacing: 0;
+  margin-top: 8px;
+  width: auto;
+  float: right;
+}
+
+th {
+  text-align: center;
+}
+
 input {
-	font-size: 2em;
-	width: 60px;
+  font-size: 2em;
+  width: 60px;
 }
+
 button {
-	font-size: 1em;
+  font-size: 1em;
 }
 </style>
