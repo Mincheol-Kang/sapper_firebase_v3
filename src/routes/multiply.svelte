@@ -12,22 +12,21 @@
         <input type="number" name="num_b" min={min_b} max={max_b} bind:value={number_b} />
 		{getFingersWithNumber(number_b).join('')}
         <button>새로 시작하기</button>
-		<div class="tooltip cursor-pointer">💬
-			<span class="tooltiptext-page">
-				<p>곱셈 놀이터 소개</p>
-				<p>
-				이곳은 곱셈을 매우 직관적으로 이해하기 위해 마련된 공간입니다.
-				10 이상의 수는 "2, 5, 10"으로 구성될 수 있는데요.
-				다섯 손가락으로 된 두 손을 가지고 수를 세는 
-				지극히 인간적인 방식이 바로 십진수임을 이해하고,
-				곱셈은 본질적으로 면적을 나타낸다는 사실을 아는 것이 아주 중요합니다.</p>
-				<p>
-				그래서 이러한 개념들을 직관적으로 알려주기 위해 만들어진 곳이 곱셈 놀이터입니다.
-				아이들에게 무작정 구구단을 외우게 하는 대신,
-				구구단의 곱셈이 왜 그런 값을 내는지 제대로 이해하게 해주시기 바랍니다.</p>
-			</span>
-		</div>
+		<span class="cursor-pointer" on:click={togglePageUsage}>💬</span>
     </form>
+	<div class="page-usage" style="display: {show_page_usage ? '' : 'none'};">
+		<p>곱셈 놀이터 소개</p>
+		<p>
+		이곳은 곱셈을 매우 직관적으로 이해하기 위해 마련된 공간입니다.
+		10 이상의 수는 "2, 5, 10"으로 구성될 수 있는데요.
+		다섯 손가락으로 된 두 손을 가지고 수를 세는 
+		지극히 인간적인 방식이 바로 십진수임을 이해하고,
+		곱셈은 본질적으로 면적을 나타낸다는 사실을 아는 것이 아주 중요합니다.</p>
+		<p>
+		그래서 이러한 개념들을 직관적으로 알려주기 위해 만들어진 곳이 곱셈 놀이터입니다.
+		아이들에게 무작정 구구단을 외우게 하는 대신,
+		구구단의 곱셈이 왜 그런 값을 내는지 제대로 이해하게 해주시기 바랍니다.</p>
+	</div>
 	<div class="hand-usage">
 		{#if number_a > 2 || number_b > 2}
 		손모양 중 👌🏽=3, ✊🏽=4 입니다. ^^;;<br>
@@ -122,6 +121,11 @@ let fingers_num_a = []
 let cube_td = '1 x 1 = 1'
 let cube_table
 let source_span_dom
+let show_page_usage = false
+
+const togglePageUsage = () => {
+	show_page_usage = !show_page_usage
+}
 
 const showNumber_a = () => {
 	fingers_num_a = getFingersWithNumber(number_a)
@@ -226,6 +230,18 @@ showNumber_a()
 </script>
 
 <style>
+.page-usage {
+	background-color: #404040;
+	color: #fff;
+	font-size: 13px;
+	text-align: justify;
+	border-radius: 6px;
+	padding: 0px 15px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: transparent transparent #404040 transparent;
+	width: 300px;
+}
 .tooltip {
 	position: relative;
 	display: inline-block;
@@ -233,30 +249,6 @@ showNumber_a()
 }
 .cube-usage {
 	border-bottom: 1px dotted #404040;
-}
-.tooltip .tooltiptext-page {
-	visibility: hidden;
-	background-color: #404040;
-	color: #fff;
-	text-align: justify;
-	border-radius: 6px;
-	padding: 0px 13px;
-	position: absolute;
-	z-index: 1;
-	top: 150%;
-	left: 50%;
-	width: 350px;
-	margin-left: -316px;
-}
-.tooltip .tooltiptext-page::after {
-	content: "";
-	position: absolute;
-	bottom: 100%;
-	left: 84%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: transparent transparent #404040 transparent;
 }
 .tooltip .tooltiptext-cube {
 	visibility: hidden;
@@ -267,23 +259,20 @@ showNumber_a()
 	padding: 10px 10px;
 	position: absolute;
 	z-index: 1;
-	top: 150%;
+	bottom: 140%;
 	left: 50%;
 	width: 180px;
 	margin-left: -132px;
 }
 .tooltip .tooltiptext-cube::after {
-	content: "";
+	content: " ";
 	position: absolute;
-	bottom: 100%;
-	left: 70%;
+	top: 100%;
+	left: 65%;
 	margin-left: -5px;
 	border-width: 5px;
 	border-style: solid;
-	border-color: transparent transparent #404040 transparent;
-}
-.tooltip:hover .tooltiptext-page {
-	visibility: visible;
+	border-color: #404040 transparent transparent transparent;
 }
 .tooltip:hover .tooltiptext-cube {
 	visibility: visible;
@@ -306,7 +295,7 @@ showNumber_a()
 }
 .cube-area {
 	position: fixed;
-	top: 1rem;
+	bottom: 1rem;
 	right: 1rem;
 	font-size: 25px;
 	background-color: white;
@@ -345,6 +334,9 @@ table {
 	border-spacing: 0px;
 	width: auto;
     float: right;
+}
+th {
+	text-align: center;
 }
 td {
 	cursor: pointer;
