@@ -448,6 +448,7 @@ function handleDragDrop(e) {
 }
 table {
 	border-spacing: 0px;
+	margin-top: 8px;
 	width: auto;
     float: right;
 }
