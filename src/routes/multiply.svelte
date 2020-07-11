@@ -91,7 +91,7 @@
 					<p>PC에선 마우스 커서를 아래 큐브들 중 하나 위에 올려보고, 
 					스마트폰에선 그냥 손가락으로 큐브들 중 하나를 터치해보세요.
 					곱셈이 면적으로 나타나는 걸 확인할 수 있습니다.</p>
-					<p>큐브 테이블을 가려놓으려면 왼쪽 맨위에 있는 [-]를 클릭하고,
+					<p>큐브 테이블을 가려놓으려면 오른쪽 [-]를 클릭하고,
 					다시 큐브 테이블을 보이게 하려면 [◼︎]를 클릭하면 됩니다.</p>
 				</span>
 			</div>
@@ -194,7 +194,7 @@ function cubeMouseOver(event) {
 	const cube_cell = Number(cube_id[2])
 	let currnet_row_cells
 
-	cube_td = `${cube_row+1} x ${cube_cell+1} = ${(cube_row+1) * (cube_cell+1)}`
+	cube_td = `${cube_cell+1} x ${cube_row+1} = ${(cube_row+1) * (cube_cell+1)}`
 
 	for(let y = 0; y < cube_rows.length; y++) {
 		currnet_row_cells = cube_rows[y].getElementsByTagName('td')
