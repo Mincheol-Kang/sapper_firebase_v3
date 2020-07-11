@@ -150,6 +150,8 @@ let show_page_usage = false
 let show_cube_table = true
 
 $: {
+	number_a = number_a > max_a ? max_a : number_a
+	number_b = number_b > max_b ? max_b : number_b
 	fingers_num_a = getFingersWithNumber(number_a)
 	cube_td = `${number_a} x ${number_b} = ${number_a * number_b}`
 }
