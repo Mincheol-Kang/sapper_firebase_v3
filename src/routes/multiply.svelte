@@ -6,13 +6,18 @@
 
 <div>
     <form>
-        <input type="number" name="num_a" min={min_a} max={max_a} bind:value={number_a} />
+        <input type="number" name="num_a"
+			min={min_a} max={max_a}
+			bind:value={number_a} />
 		{getFingersWithNumber(number_a).join('')}
 		x
-        <input type="number" name="num_b" min={min_b} max={max_b} bind:value={number_b} />
+        <input type="number" name="num_b"
+			min={min_b} max={max_b}
+			bind:value={number_b} />
 		{getFingersWithNumber(number_b).join('')}
         <button>새로 시작하기</button>
-		<span class="cursor-pointer" on:click={togglePageUsage}>💬</span>
+		<span class="cursor-pointer"
+			on:click={togglePageUsage}>💬</span>
     </form>
 	<div class="page-usage" style="display: {show_page_usage ? '' : 'none'};">
 		<p>곱셈 놀이터 소개</p>
@@ -27,7 +32,7 @@
 		아이들에게 무작정 구구단을 외우게 하는 대신,
 		구구단의 곱셈이 왜 그런 값을 내는지 제대로 이해하게 해주시기 바랍니다.</p>
 	</div>
-	<div class="hand-usage">
+	<div class="hand-usage blue-12">
 		{#if number_a > 2 || number_b > 2}
 		손모양 중 👌🏽=3, ✊🏽=4 입니다. ^^;;<br>
 		{/if}
@@ -55,36 +60,6 @@
 	{/each}
 </div>
 <div class="cube-area">
-	<div class="cube-top">
-		<div class="close-button cursor-pointer" on:click={toggleCubeTable}>
-			<div class="tooltip cursor-pointer">
-			{#if show_cube_table}
-				[-]
-			{:else}
-				[◼︎]
-			{/if}
-				<span class="tooltiptext-{show_cube_table ? 'close' : 'open'}">
-				{#if show_cube_table}
-					큐브 테이블을 가려놓습니다.
-				{:else}
-					큐브 테이블을 다시 엽니다.
-				{/if}
-				</span>
-			</div>
-		</div>
-		<div class="selected-cubes" style="display: {show_cube_table ? '' : 'none'};">
-			<div class="tooltip hand-usage cursor-pointer cube-usage">
-				큐브 테이블 사용법 보기
-				<span class="tooltiptext-cube">
-					<p>PC에선 마우스 커서를 아래 큐브들 중 하나 위에 올려보고, 
-					스마트폰에선 그냥 손가락으로 큐브들 중 하나를 터치해보세요.
-					곱셈이 면적으로 나타나는 걸 확인할 수 있습니다.</p>
-					<p>큐브 테이블을 가려놓으려면 왼쪽 맨위에 있는 [-]를 클릭하고,
-					다시 큐브 테이블을 보이게 하려면 [◼︎]를 클릭하면 됩니다.</p>
-				</span>
-			</div>
-		</div>
-	</div>
 	<div style="display: {show_cube_table ? '' : 'none'};">
 		<table bind:this={cube_table}>
 			<thead>
@@ -107,6 +82,36 @@
 	</div>
 	<div class="selected-cubes" style="display: {show_cube_table ? '' : 'none'};">
 		{cube_td}
+	</div>
+	<div class="cube-bottom">
+		<div class="selected-cubes" style="display: {show_cube_table ? '' : 'none'};">
+			<div class="tooltip cursor-pointer cube-usage blue-12">
+				큐브 테이블 사용법 보기
+				<span class="tooltiptext-cube">
+					<p>PC에선 마우스 커서를 아래 큐브들 중 하나 위에 올려보고, 
+					스마트폰에선 그냥 손가락으로 큐브들 중 하나를 터치해보세요.
+					곱셈이 면적으로 나타나는 걸 확인할 수 있습니다.</p>
+					<p>큐브 테이블을 가려놓으려면 왼쪽 맨위에 있는 [-]를 클릭하고,
+					다시 큐브 테이블을 보이게 하려면 [◼︎]를 클릭하면 됩니다.</p>
+				</span>
+			</div>
+		</div>
+		<div class="close-button cursor-pointer" on:click={toggleCubeTable}>
+			<div class="tooltip cursor-pointer">
+			{#if show_cube_table}
+				[-]
+			{:else}
+				[◼︎]
+			{/if}
+				<span class="tooltiptext-{show_cube_table ? 'close' : 'open'}">
+				{#if show_cube_table}
+					큐브 테이블을 가려놓습니다.
+				{:else}
+					큐브 테이블을 다시 엽니다.
+				{/if}
+				</span>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -145,6 +150,7 @@ let show_page_usage = false
 let show_cube_table = true
 
 $: {
+	fingers_num_a = getFingersWithNumber(number_a)
 	cube_td = `${number_a} x ${number_b} = ${number_a * number_b}`
 }
 const togglePageUsage = () => {
@@ -153,10 +159,6 @@ const togglePageUsage = () => {
 
 const toggleCubeTable = () => {
 	show_cube_table = !show_cube_table
-}
-
-$: {
-	fingers_num_a = getFingersWithNumber(number_a)
 }
 
 const getFingersWithNumber = (target_number = min_a) => {
@@ -267,15 +269,12 @@ function handleDragDrop(e) {
 	border-width: 2px;
 	border-style: solid;
 	border-color: transparent transparent #404040 transparent;
-	width: 300px;
+	width: 250px;
 }
 .tooltip {
 	position: relative;
 	display: inline-block;
 	font-size: 13px;
-}
-.cube-usage {
-	border-bottom: 1px dotted #404040;
 }
 .tooltip .tooltiptext-cube {
 	visibility: hidden;
@@ -290,9 +289,9 @@ function handleDragDrop(e) {
 	left: 50%;
 	width: 180px;
 	margin-left: -132px;
-	-webkit-box-shadow: -5px -4px 5px -1px white;
-	-moz-box-shadow: -5px -4px 5px -1px white;
-	box-shadow: -5px -4px 5px -1px white;
+	-webkit-box-shadow: 0px 0px 11px 5px white;
+	-moz-box-shadow: 0px 0px 11px 5px white;
+	box-shadow: 0px 0px 11px 5px white;
 }
 .tooltip .tooltiptext-cube::after {
 	content: " ";
@@ -316,10 +315,10 @@ function handleDragDrop(e) {
 	padding: 10px 10px;
 	position: absolute;
 	z-index: 1;
-	bottom: 140%;
+	bottom: 100%;
 	left: 50%;
 	width: 150px;
-	margin-left: -33px;
+	margin-left: -153px;
 	-webkit-box-shadow: 0px 0px 11px 5px white;
 	-moz-box-shadow: 0px 0px 11px 5px white;
 	box-shadow: 0px 0px 11px 5px white;
@@ -328,7 +327,7 @@ function handleDragDrop(e) {
 	content: " ";
 	position: absolute;
 	top: 100%;
-	left: 20%;
+	left: 90%;
 	margin-left: -5px;
 	border-width: 5px;
 	border-style: solid;
@@ -346,16 +345,19 @@ function handleDragDrop(e) {
 	padding: 10px 10px;
 	position: absolute;
 	z-index: 1;
-	bottom: 120%;
+	bottom: 100%;
 	left: 50%;
 	width: 150px;
-	margin-left: -140px;
+	margin-left: -153px;
+	-webkit-box-shadow: 0px 0px 11px 5px white;
+	-moz-box-shadow: 0px 0px 11px 5px white;
+	box-shadow: 0px 0px 11px 5px white;
 }
 .tooltip .tooltiptext-open::after {
 	content: " ";
 	position: absolute;
 	top: 100%;
-	left: 82%;
+	left: 90%;
 	margin-left: -5px;
 	border-width: 5px;
 	border-style: solid;
@@ -393,22 +395,22 @@ function handleDragDrop(e) {
 	-moz-box-shadow: -5px -4px 5px -1px rgba(0,0,0,0.51);
 	box-shadow: -5px -4px 5px -1px rgba(0,0,0,0.51);
 }
-.cube-top {
+.cube-bottom {
 	border: 0px solid #404040;
-	min-width: 1em;
-	min-height: 1.4em;
+	min-width: 0.8em;
+	min-height: 1.2em;
 }
 .close-button {
 	position: absolute;
-    top: 5px;
-    left: 7px;
+    bottom: 6px;
+    right: 5px;
 	display: inline-block;
-	text-align: left;
+	text-align: right;
 	font-size: 15px;
 }
 .selected-cubes {
 	display: inline-block;
-	min-width: 7em;
+	min-width: 6em;
 	text-align: right;
 }
 .cube-row {
@@ -430,11 +432,19 @@ function handleDragDrop(e) {
 	text-align: right;
 	padding-right: 5px;
 }
-.hand-usage {
+.blue-12 {
 	color: blue;
 	font-size: 12px;
+}
+.hand-usage {
 	margin-top: 0.5em;
 	margin-bottom: 1em;
+}
+.cube-usage {
+	position: absolute;
+    bottom: 8px;
+    right: 35px;
+	border-bottom: 1px dotted #404040;
 }
 table {
 	border-spacing: 0px;
