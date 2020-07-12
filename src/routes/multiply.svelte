@@ -312,16 +312,16 @@ function handleDragDrop(e) {
   padding: 0 13px;
   position: absolute;
   z-index: 1;
-  bottom: 140%;
+  bottom: 140%; /* 툴팁 박스 상하 배치: 수가 작으면 아래쪽, 크면 위쪽 */
+  margin-left: -132px; /* 툴팁 박스 좌우 배치: 수가 작으면 왼쪽, 크면 오른쪽 */
   left: 50%;
   width: 180px;
-  margin-left: -132px;
   box-shadow: 0 0 11px 5px #fff;
 }
 
 .tooltip .tooltiptext-cube::after {
   position: absolute;
-  left: 65%;
+  left: 65%; /* 툴팁 화살표 위치: 수가 작으면 왼쪽, 크면 오른쪽 */
   margin-left: -5px;
 }
 
@@ -338,20 +338,20 @@ function handleDragDrop(e) {
   border-radius: 6px;
   padding: 10px;
   z-index: 1;
-  bottom: 100%;
+  bottom: 100%; /* 툴팁 박스 상하 배치: 수가 작으면 아래쪽, 크면 위쪽 */
   width: 150px;
   position: absolute;
 }
 
 .tooltip .tooltiptext-close {
   left: 50%;
-  margin-left: -153px;
+  margin-left: -153px; /* 툴팁 박스 좌우 배치: 수가 작으면 왼쪽, 크면 오른쪽 */
   box-shadow: 0 0 11px 5px #fff;
 }
 
 .tooltip .tooltiptext-close::after {
   position: absolute;
-  left: 90%;
+  left: 90%; /* 툴팁 화살표 위치: 수가 작으면 왼쪽, 크면 오른쪽 */
   margin-left: -5px;
 }
 
@@ -361,7 +361,7 @@ function handleDragDrop(e) {
 
 .tooltip .tooltiptext-open {
   left: 50%;
-  margin-left: -153px;
+  margin-left: -153px; /* 툴팁 박스 좌우 배치: 수가 작으면 왼쪽, 크면 오른쪽 */
   -webkit-box-shadow: 0 0 11px 5px #fff;
   -moz-box-shadow: 0 0 11px 5px #fff;
   box-shadow: 0 0 11px 5px #fff;
@@ -369,7 +369,7 @@ function handleDragDrop(e) {
 
 .tooltip .tooltiptext-open::after {
   position: absolute;
-  left: 90%;
+  left: 90%; /* 툴팁 화살표 위치: 수가 작으면 왼쪽, 크면 오른쪽 */
   margin-left: -5px;
 }
 
