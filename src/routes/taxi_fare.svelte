@@ -1,10 +1,12 @@
 <script>
-const page_title = '택시요금 계산기'
+import TaxiFareTable from './taxi_fare_table.svelte'
 
-let estimated_mileage = 0
-let estimated_drive_time = 0
+const page_title = '서울택시비 계산기'
 
-const taxis = [
+let est_mileage = 0
+let est_drive_time = 0
+
+let taxis = [
     {
         id: 'mid_size',
         name: '중형택시',
@@ -103,8 +105,16 @@ const taxis = [
     },
 ]
 
-$: {
+function getFareString(fare_number) {
+    return fare_number.toLocaleString() + '원'
+}
 
+$: {
+    let this_taxt_fare = 0
+    for(let i = 0; i < taxis.length; i++) {
+        this_taxt_fare = taxis[i].basic_fare + (est_mileage * taxis[i].fare_unit)
+        taxis[i].fare = getFareString(this_taxt_fare)
+    }
 }
 
 </script>
@@ -119,32 +129,17 @@ $: {
 	<div>
         <div>
             <label>예상 이동 거리</label>
-            <input type="number" bind:value={estimated_mileage} />
+            <input type="number" bind:value={est_mileage} />
             <label>km</label>
         </div>
         <div>
             <label>예상 이동 시간</label>
-            <input type="number" bind:value={estimated_drive_time} />
+            <input type="number" bind:value={est_drive_time} />
             <label>분</label>
         </div>
 	</div>
 	<div>
-        <table class="tg">
-            <thead>
-                <tr>
-                    <th class="tg-apfx">택시 유형</th>
-                    <th class="tg-apfx">택시 요금</th>
-                </tr>
-            </thead>
-            <tbody>
-                {#each taxis as taxi}
-                <tr>
-                    <td class="tg-nrix">{taxi.name}</td>
-                    <td class="tg-mwxe">{taxi.fare}</td>
-                </tr>
-                {/each}
-            </tbody>
-        </table>
+        <TaxiFareTable taxis={taxis} />
 	</div>
 </div>
 
@@ -152,52 +147,5 @@ $: {
 input{
     font-size: 1.5em;
     width: 60px;
-}
-table {
-    margin-top: 20px;
-}
-.tg {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.tg td {
-  border-color: black;
-  border-style: solid;
-  border-width: 1px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  overflow: hidden;
-  padding: 10px 5px;
-  word-break: normal;
-}
-
-.tg th {
-  border-color: black;
-  border-style: solid;
-  border-width: 1px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  overflow: hidden;
-  padding: 10px 5px;
-  word-break: normal;
-}
-
-.tg .tg-mwxe {
-  text-align: right;
-  vertical-align: middle
-}
-
-.tg .tg-apfx {
-  background-color: #dfdddd;
-  font-weight: bold;
-  text-align: center;
-  vertical-align: middle
-}
-
-.tg .tg-nrix {
-  text-align: center;
-  vertical-align: middle
 }
 </style>
