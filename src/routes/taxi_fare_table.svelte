@@ -14,7 +14,7 @@ export let taxis
             {#each taxis as taxi}
             <tr>
                 <td class="tg-nrix">{taxi.name}</td>
-                <td class="tg-mwxe">{taxi.fare}</td>
+                <td class="tg-mwxe">{@html taxi.fare}</td>
             </tr>
             {/each}
         </tbody>
