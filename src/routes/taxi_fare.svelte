@@ -8,19 +8,24 @@ let est_drivetime_min = 0
 
 let taxis = [
     {
-        id: 'mid_size',
-        name: '중형택시',
+        name: '중형택시 (주간)',
         fare: '',
         basic_mileage_km: 2,
         basic_fare: 3800,
         fare_per: 100,
         mileage_unit_meter: 132,
         drive_time_unit_sec: 31,
-        midnight_extra: 0.2,
-        outside_extra: 0.2
     },
     {
-        id: 'kakao_venti',
+        name: '중형택시 (심야)',
+        fare: '',
+        basic_mileage_km: 2,
+        basic_fare: 4600,
+        fare_per: 120,
+        mileage_unit_meter: 132,
+        drive_time_unit_sec: 31,
+    },
+    {
         name: '카카오 벤티',
         fare: '',
         basic_mileage_km: 2,
@@ -28,11 +33,8 @@ let taxis = [
         fare_per: 100,
         mileage_unit_meter: 131,
         drive_time_unit_sec: 40,
-        midnight_extra: 0,
-        outside_extra: 0
     },
     {
-        id: 'tada_premium',
         name: '타다 프리미엄',
         fare: '',
         basic_mileage_km: 2,
@@ -40,11 +42,8 @@ let taxis = [
         fare_per: 122,
         mileage_unit_meter: 100,
         drive_time_unit_sec: 30,
-        midnight_extra: 0,
-        outside_extra: 0
     },
     {
-        id: 'full_size',
         name: '대형승용 및 모범택시',
         fare: '',
         basic_mileage_km: 3,
@@ -52,11 +51,8 @@ let taxis = [
         fare_per: 200,
         mileage_unit_meter: 151,
         drive_time_unit_sec: 36,
-        midnight_extra: 0,
-        outside_extra: 0
     },
     {
-        id: 'dolbom',
         name: '돌봄택시 (법인조합)',
         fare: '',
         basic_mileage_km: 3,
@@ -64,11 +60,8 @@ let taxis = [
         fare_per: 200,
         mileage_unit_meter: 151,
         drive_time_unit_sec: 36,
-        midnight_extra: 0,
-        outside_extra: 0
     },
     {
-        id: 'kakao_black',
         name: '카카오 블랙',
         fare: '',
         basic_mileage_km: 0,
@@ -76,11 +69,8 @@ let taxis = [
         fare_per: 100,
         mileage_unit_meter: 71.4,
         drive_time_unit_sec: 15,
-        midnight_extra: 0,
-        outside_extra: 0
     },
     {
-        id: 'uber_black',
         name: '우버 블랙',
         fare: '',
         basic_mileage_km: 0,
@@ -88,11 +78,8 @@ let taxis = [
         fare_per: 100,
         mileage_unit_meter: 71.4,
         drive_time_unit_sec: 15,
-        midnight_extra: 0,
-        outside_extra: 0
     },
     {
-        id: 'limo_black',
         name: '리모 블랙',
         fare: '',
         basic_mileage_km: 0,
@@ -100,14 +87,12 @@ let taxis = [
         fare_per: 100,
         mileage_unit_meter: 71.4,
         drive_time_unit_sec: 15,
-        midnight_extra: 0,
-        outside_extra: 0
     },
 ]
 
 function getFareString(fare_number) {
     const ceiled_fare = Math.ceil(fare_number)
-    return ceiled_fare.toLocaleString() + '원'
+    return '<b>' + ceiled_fare.toLocaleString() + '</b>원'
 }
 
 $: {
@@ -128,7 +113,7 @@ $: {
         }
 
         if(est_drivetime_sec > 0) {
-            this_taxt_fare_per_min += taxis[i].fare_per * (est_drivetime_sec / taxis[i].drive_time_unit_sec)
+            this_taxt_fare_per_min += (est_drivetime_sec / taxis[i].drive_time_unit_sec) * taxis[i].fare_per
         }
 
         taxis[i].fare =
@@ -149,12 +134,12 @@ $: {
 	<div>
         <div>
             <label>예상 이동 거리</label>
-            <input type="number" bind:value={est_mileage_km} />
+            <input type="number" min="0" bind:value={est_mileage_km} />
             <label>km</label>
         </div>
         <div>
             <label>예상 이동 시간</label>
-            <input type="number" bind:value={est_drivetime_min} />
+            <input type="number" min="0" bind:value={est_drivetime_min} />
             <label>분</label>
         </div>
 	</div>
@@ -165,7 +150,7 @@ $: {
 
 <style>
 input{
-    font-size: 1.5em;
+    font-size: 1em;
     width: 60px;
 }
 </style>
