@@ -2,71 +2,75 @@
 export let taxis
 </script>
 
-<div>
-    <table class="tg">
-        <thead>
-            <tr>
-                <th class="tg-apfx">택시 유형</th>
-                <th class="tg-apfx">택시 요금</th>
-            </tr>
-        </thead>
-        <tbody>
-            {#each taxis as taxi}
-            <tr>
-                <td class="tg-nrix">{taxi.name}</td>
-                <td class="tg-mwxe">{@html taxi.fare}</td>
-            </tr>
-            {/each}
-        </tbody>
-    </table>
+<div class="fare-area">
+    {#each taxis as taxi}
+    <div class="card-div cursor-pointer"
+        data-tooltip-text="거리요금: {taxi.fare_per}원/{taxi.mileage_unit_meter}m, 시간요금: {taxi.fare_per}원/{taxi.drive_time_unit_sec}초"
+    >
+        <label>{taxi.name}</label>
+        <p>{@html taxi.fare}</p> 
+    </div>
+    {/each}
 </div>
 
 <style>
-table {
-    margin-top: 20px;
+.fare-area {
+    margin-top: 1em;
 }
-.tg {
-  border-collapse: collapse;
-  border-spacing: 0;
+p {
+    padding: 0 10px;
 }
-
-.tg td {
-  border-color: black;
-  border-style: solid;
-  border-width: 1px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  overflow: hidden;
-  padding: 10px 5px;
-  word-break: normal;
+.card-div {
+    display: inline-block;
+    min-width: 160px;
+    background: rgba(255,255,255,0.5);
+    overflow: hidden;
+    padding: 0;
+    margin: 0.1em 0.2em;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
 }
-
-.tg th {
-  border-color: black;
-  border-style: solid;
-  border-width: 1px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  overflow: hidden;
-  padding: 10px 5px;
-  word-break: normal;
+.card-div label {
+    display: block;
+    background: #1c6ea43d;
+    font-weight: bold;
+    padding: 5px 10px;
+    font-size: 15px;
+	cursor: pointer;
 }
 
-.tg .tg-mwxe {
-  text-align: right;
-  vertical-align: middle
+[data-tooltip-text]:hover {
+  position: relative;
 }
 
-.tg .tg-apfx {
-  background-color: #dfdddd;
-  font-weight: bold;
-  text-align: center;
-  vertical-align: middle
+[data-tooltip-text]:hover:after {
+  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+  -moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+  box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+
+  color: #FFFFFF;
+  font-size: 12px;
+  content: attr(data-tooltip-text);
+
+  margin-bottom: 0px;
+  bottom: 15%;
+  left: 0.8em;
+  padding: 7px 5px;
+  position: absolute;
+  width: auto;
+  min-width: 50px;
+  max-width: 120px;
+  word-wrap: break-word;
 }
 
-.tg .tg-nrix {
-  text-align: center;
-  vertical-align: middle
+.cursor-pointer {
+	cursor: pointer;
 }
 </style>
