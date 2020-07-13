@@ -55,7 +55,7 @@
 		<li><a aria-current='{segment === "multiply" ? "page" : undefined}' href='multiply'>곱셈 놀이터</a></li>
 		<li><a aria-current='{segment === "pythagoras" ? "page" : undefined}' href='pythagoras'>피타고라스 놀이터</a></li>
 		<li><a aria-current='{segment === "preg_week" ? "page" : undefined}' href='preg_week'>임신주수 구하기</a></li>
-		<li><a aria-current='{segment === "taxi_fare" ? "page" : undefined}' href='taxi_fare'>서울택시비 계산기</a></li>
+		<li><a aria-current='{segment === "taxi_fare" ? "page" : undefined}' href='taxi_fare'>서울 택시비 계산기</a></li>
 
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
